@@ -1,12 +1,14 @@
 import React from 'react';
-import {Card, CardBody, CardImg, CardImgOverlay, CardTitle, Col, Container, Row} from 'reactstrap';
+import {Card, CardBody, CardImg, CardImgOverlay, CardTitle, Col, Container, Row, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import s from './MenuComponent.module.css';
 import DishDetail from "./DishDetailComponent";
+import {Link} from "react-router-dom";
 
 
-const MenuCard = ({dish, onClick}) => {
+const MenuCard = ({dish}) => {
     return (
-        <Card onClick={() => onClick(dish.id)} className={s.foodCard}>
+        <Card>
+            <Link to={`/menu/${dish.id}`}>
             <CardImg src={dish.image} alt={dish.name}/>
             <CardImgOverlay>
                 <CardBody>
@@ -15,6 +17,7 @@ const MenuCard = ({dish, onClick}) => {
                     </CardTitle>
                 </CardBody>
             </CardImgOverlay>
+            </Link>
         </Card>
     );
 }
@@ -23,22 +26,26 @@ const Menu = (props) => {
     const menu = props.dishes.map((dish) => {
         return (
             <Col md="5" key={dish.id} className="position-relative m-1">
-                <MenuCard onClick={props.onClick} dish={dish}/>
+                <MenuCard dish={dish}/>
             </Col>
         );
     });
     return (
         <div>
             <Container>
+                <Row>
+                    <Breadcrumb>
+                        <BreadcrumbItem>
+                            <Link to={`/home`}>Home</Link>
+                        </BreadcrumbItem>
+                        <BreadcrumbItem active>Menu</BreadcrumbItem>
+                    </Breadcrumb>
+                </Row>
                 <Row sm="1" className="d-flex">
+                    <h3>Menu</h3>
                     {menu}
                 </Row>
-
             </Container>
-            <DishDetail
-                dish={props.dishes.filter((dish) => dish.id === props.selectedDish)[0]}
-                comments={props.comments.filter((comment) => comment.dishId === props.selectedDish)}
-            />
         </div>
     );
 }
