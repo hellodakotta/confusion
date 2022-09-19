@@ -35,7 +35,10 @@ const Menu = (props) => {
                 </Row>
 
             </Container>
-            <DishDetail dish={props.dishes.filter((dish) => dish.id === props.selectedDish)[0]}/>
+            <DishDetail
+                dish={props.dishes.filter((dish) => dish.id === props.selectedDish)[0]}
+                comments={props.comments.filter((comment) => comment.dishId === props.selectedDish)}
+            />
         </div>
     );
 }

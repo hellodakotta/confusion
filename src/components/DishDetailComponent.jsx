@@ -44,7 +44,7 @@ const DishDetail = (props) => {
                     <DishDetailCard dish={dish} />
                 </Col>
                 <Col md="5" sm="12" className="m-1">
-                    <Comments comments={dish.comments} />
+                    <Comments comments={props.comments} />
                 </Col>
             </Row>
         </Container>
