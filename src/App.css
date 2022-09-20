@@ -31,3 +31,14 @@ address{
 .navbar-dark {
     background-color: #512DA8;
 }
+
+.media {
+    display: flex;
+
+}
+.media-left {
+
+}
+.media-top {
+
+}
