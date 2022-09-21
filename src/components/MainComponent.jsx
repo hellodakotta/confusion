@@ -1,24 +1,18 @@
 import Menu from "./MenuComponent";
-import React, {Component, useState} from "react";
+import React from "react";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
-import {Route, Routes, useParams} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import Home from "./HomeComponent";
 import {Navigate} from "react-router";
 import Contact from "./ContactComponent";
-import {DISHES} from '../shared/dishes';
-import {COMMENTS} from "../shared/comments";
-import {PROMOTIONS} from "../shared/promotions";
-import {LEADERS} from "../shared/leaders";
 import DishWithId from "./DishWithId";
 import About from "./AboutComponent";
+import {connect} from 'react-redux';
 
 
-const Main = (props) => {
-    let [dishes] = useState(DISHES);
-    let [comments] = useState(COMMENTS);
-    let [promotions] = useState(PROMOTIONS);
-    let [leaders] = useState(LEADERS);
+const Main = ({dishes, promotions, comments, leaders}) => {
+
     return (
         <div className="App">
             <Header/>
@@ -45,4 +39,13 @@ const Main = (props) => {
 }
 
 
-export default Main;
+const mapStateToProps = state => {
+    return {
+        dishes: state.dishes,
+        comments: state.comments,
+        promotions: state.promotions,
+        leaders: state.leaders
+    };
+}
+
+export default (connect(mapStateToProps)(Main));
