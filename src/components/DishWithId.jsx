@@ -3,7 +3,7 @@ import React from 'react';
 import DishDetail from "./DishDetailComponent";
 import {useParams} from "react-router-dom";
 
-const DishWithId = ({dishes, comments}) => {
+const DishWithId = ({dishes, comments, addComment}) => {
 
 
     let { id } = useParams();
@@ -13,7 +13,7 @@ const DishWithId = ({dishes, comments}) => {
 
 return (
 
-    <DishDetail dish={dish} comments={dishComments}/>
+    <DishDetail addComment={addComment} dish={dish} comments={dishComments}/>
 );
 }
 
