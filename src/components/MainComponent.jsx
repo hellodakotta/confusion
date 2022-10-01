@@ -5,7 +5,7 @@ import Footer from "./FooterComponent";
 import {Route, Routes} from 'react-router-dom';
 import Home from "./HomeComponent";
 import {Navigate} from "react-router";
-import Contact from "./ContactComponent";
+import Contact from "./ContactComponent2";
 import DishWithId from "./DishWithId";
 import About from "./AboutComponent";
 import {connect} from 'react-redux';

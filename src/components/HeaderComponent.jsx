@@ -130,7 +130,6 @@ class Header extends Component {
                                            innerRef={(input) => this.remember = input}/>
                                     {' '} Remember me
                                 </Label>
-
                             </FormGroup>
                             <FormGroup>
                                 <Button type="submit" value="submit" className="bg-primary">Login</Button>
