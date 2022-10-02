@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Col, Label, Row} from 'reactstrap';
-import {Control, Errors, LocalForm} from 'react-redux-form';
+import {Control, Errors, Form, actions} from 'react-redux-form';
 import {Link} from "react-router-dom";
 
 
@@ -29,6 +29,7 @@ const Contact = (props) => {
     const handleSubmit = (values) => {
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
+        this.props.resetFeedbackForm();
     }
 
 
@@ -82,7 +83,7 @@ const Contact = (props) => {
             <Row className="row-content">
                 <Col xs="12">
                     <h3>Send Us Your Feedback</h3>
-                    <LocalForm onSubmit={(values) => handleSubmit(values)}>
+                    <Form model="feedback" onSubmit={(values) => handleSubmit(values)}>
                         <Row className="form-group">
                             <Label htmlFor="firstname" md={2}>First Name</Label>
                             <Col md={10}>
@@ -205,7 +206,7 @@ const Contact = (props) => {
                                 </Button>
                             </Col>
                         </Row>
-                    </LocalForm>
+                    </Form>
                 </Col>
             </Row>
         </div>
