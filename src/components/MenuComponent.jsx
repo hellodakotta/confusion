@@ -4,13 +4,14 @@ import s from './MenuComponent.module.css';
 import DishDetail from "./DishDetailComponent";
 import {Link} from "react-router-dom";
 import Loader from "./LoadingComponent";
+import {baseUrl} from "../shared/baseUrl";
 
 
 const MenuCard = ({dish}) => {
     return (
         <Card>
             <Link to={`/menu/${dish.id}`}>
-            <CardImg src={dish.image} alt={dish.name}/>
+            <CardImg src={`${baseUrl}${dish.image}`} alt={dish.name}/>
             <CardImgOverlay>
                 <CardBody>
                     <CardTitle tag="h5">
@@ -23,15 +24,15 @@ const MenuCard = ({dish}) => {
     );
 }
 
-const Menu = ({isLoading, errMess, dishes}) => {
+const Menu = ({dishesIsLoading, dishesErrMess, dishes}) => {
 
-    if (isLoading) {
+    if (dishesIsLoading) {
         return (
             <Loader/>
         );
-    } else if (errMess) {
+    } else if (dishesErrMess) {
         return (
-            <h4>{errMess}</h4>
+            <h4>{dishesErrMess}</h4>
         );
     } else {
         const menu = dishes.map((dish) => {

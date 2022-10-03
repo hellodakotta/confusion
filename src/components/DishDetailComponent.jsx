@@ -1,25 +1,35 @@
 import {
     Breadcrumb,
-    BreadcrumbItem, Button,
+    BreadcrumbItem,
     Card,
     CardBody,
     CardImg,
     CardText,
     CardTitle,
     Col,
-    Container, Label,
-    List, Modal, ModalBody, ModalHeader,
+    Container,
+    List,
     Row
 } from "reactstrap";
-import React, {useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
-import {Control, Errors, LocalForm} from "react-redux-form";
 import CommentForm from "./CommentForm";
+import {baseUrl} from "../shared/baseUrl";
+import Loader from "./LoadingComponent";
 
-const DishDetailCard = ({dish}) => {
-    return (
+const DishDetailCard = ({dish, dishesIsLoading, dishesErrMess}) => {
+    if (dishesIsLoading) {
+        return (
+            <Loader/>
+        );
+    } else if (dishesErrMess) {
+        return (
+            <h4>{dishesErrMess}</h4>
+        );
+    } else
+        return (
         <Card>
-            <CardImg src={dish.image} alt={dish.name}/>
+            <CardImg src={`${baseUrl}${dish.image}`} alt={dish.name}/>
             <CardBody>
                 <CardTitle tag="h5">
                     {dish.name}
@@ -76,7 +86,11 @@ const DishDetail = (props) => {
             </Row>
             <Row sm="1">
                 <Col md="5" sm="12" className="m-1">
-                    <DishDetailCard dish={dish}/>
+                    <DishDetailCard
+                        dish={dish}
+                        dishesIsLoading={props.dishesIsLoading}
+                        dishesErrMess={props.dishesErrMess}
+                    />
                 </Col>
                 <Col md="5" sm="12" className="m-1">
                     <Comments comments={props.comments}/>

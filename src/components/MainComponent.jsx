@@ -9,9 +9,8 @@ import Contact from "./ContactComponent2";
 import DishWithId from "./DishWithId";
 import About from "./AboutComponent";
 import {connect} from 'react-redux';
-import {addComment, fetchDishes} from '../redux/ActionCreators'
+import {addComment, fetchDishes, fetchLeaders, fetchPromos, fetchComments} from '../redux/ActionCreators'
 import {actions} from "react-redux-form";
-import {InitialFeedback} from "../redux/forms";
 
 
 class Main extends React.Component {
@@ -22,33 +21,49 @@ class Main extends React.Component {
 
     componentDidMount() {
         this.props.fetchDishes();
+        this.props.fetchLeaders();
+        this.props.fetchPromos();
+        this.props.fetchComments();
+
     }
     render() {
+
         return (
             <div className="App">
                 <Header/>
                 <Routes>
                     <Route path="/home" element={<Home
-                        isLoading={this.props.dishes.isLoading}
-                        errMess={this.props.dishes.errMess}
+                        dishesIsLoading={this.props.dishes.isLoading}
+                        promotionsIsLoading={this.props.promotions.isLoading}
+                        leadersIsLoading={this.props.leaders.isLoading}
+                        dishesErrMess={this.props.dishes.errMess}
+                        promotionsErrMess={this.props.promotions.errMess}
+                        leadersErrMess={this.props.leaders.errMess}
                         dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
-                        promotion={this.props.promotions.filter((promo) => promo.featured)[0]}
-                        leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+                        promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
+                        leader={this.props.leaders.leaders.filter((leader) => leader.featured)[0]}
                     />}/>
                     <Route exact path="/menu"
                            element={<Menu
-                               isLoading={this.props.dishes.isLoading}
-                               errMess={this.props.dishes.errMess}
+                               dishesIsLoading={this.props.dishes.isLoading}
+
+                               dishesErrMess={this.props.dishes.errMess}
+
                                fetchDishes={this.props.fetchDishes}
                                dishes={this.props.dishes.dishes}/>
                            }/>
                     <Route path="/menu/:id" element={<DishWithId
                         addComment={this.props.addComment}
                         dishes={this.props.dishes.dishes}
-                        isLoading={this.props.dishes.isLoading}
-                        errMess={this.props.dishes.errMess}
-                        comments={this.props.comments}/>}/>
-                    <Route exact path="/aboutus" element={<About leaders={this.props.leaders}/>}/>
+                        dishesIsLoading={this.props.dishes.isLoading}
+                        promotionsIsLoading={this.props.promotions.isLoading}
+                        leadersIsLoading={this.props.leaders.isLoading}
+                        dishesErrMess={this.props.dishes.errMess}
+                        promotionsErrMess={this.props.promotions.errMess}
+                        leadersErrMess={this.props.leaders.errMess}
+                        commentsErrMess={this.props.comments.errMess}
+                        comments={this.props.comments.comments}/>}/>
+                    <Route exact path="/aboutus" element={<About leaders={this.props.leaders.leaders}/>}/>
                     <Route exact path="/contactus" element={<Contact resetFeedbackForm={this.props.resetFeedbackForm}/>}/>
                     <Route
                         path="*"
@@ -74,6 +89,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => ({
     addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
     fetchDishes: () => { dispatch(fetchDishes())},
+    fetchLeaders: () => { dispatch(fetchLeaders())},
+    fetchPromos: () => { dispatch(fetchPromos())},
+    fetchComments: () => { dispatch(fetchComments())},
     resetFeedbackForm: () => {dispatch(actions.reset('feedback'))}
 });
 
