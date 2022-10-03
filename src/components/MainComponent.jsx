@@ -9,7 +9,7 @@ import Contact from "./ContactComponent2";
 import DishWithId from "./DishWithId";
 import About from "./AboutComponent";
 import {connect} from 'react-redux';
-import {addComment, fetchDishes, fetchLeaders, fetchPromos, fetchComments} from '../redux/ActionCreators'
+import {postComment, fetchDishes, fetchLeaders, fetchPromos, fetchComments} from '../redux/ActionCreators'
 import {actions} from "react-redux-form";
 
 
@@ -53,7 +53,7 @@ class Main extends React.Component {
                                dishes={this.props.dishes.dishes}/>
                            }/>
                     <Route path="/menu/:id" element={<DishWithId
-                        addComment={this.props.addComment}
+                        postComment={this.props.postComment}
                         dishes={this.props.dishes.dishes}
                         dishesIsLoading={this.props.dishes.isLoading}
                         promotionsIsLoading={this.props.promotions.isLoading}
@@ -87,7 +87,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+    postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
     fetchDishes: () => { dispatch(fetchDishes())},
     fetchLeaders: () => { dispatch(fetchLeaders())},
     fetchPromos: () => { dispatch(fetchPromos())},

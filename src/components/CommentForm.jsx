@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Button, Col, Label, Modal, ModalBody, ModalHeader, Row} from "reactstrap";
 import {Control, Errors, LocalForm} from 'react-redux-form';
 
-const CommentForm = ({addComment, dishId}) => {
+const CommentForm = ({postComment, dishId}) => {
 
     let [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -11,7 +11,7 @@ const CommentForm = ({addComment, dishId}) => {
     }
 
     const handleSubmit = (values) => {
-        addComment(dishId, values.rating, values.author, values.comment);
+        postComment(dishId, values.rating, values.author, values.comment);
         toggleModal();
     }
 

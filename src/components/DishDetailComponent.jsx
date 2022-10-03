@@ -96,7 +96,7 @@ const DishDetail = (props) => {
                     <Comments comments={props.comments}/>
                     <CommentForm
                         dishId={props.dish.id}
-                        addComment={props.addComment}
+                        postComment={props.postComment}
                         comments={props.comments} />
                 </Col>
 

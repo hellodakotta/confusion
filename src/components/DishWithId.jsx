@@ -4,7 +4,7 @@ import DishDetail from "./DishDetailComponent";
 import {useParams} from "react-router-dom";
 import Loader from "./LoadingComponent";
 
-const DishWithId = ({dishes, comments, addComment, isLoading, errMess}) => {
+const DishWithId = ({dishes, comments, postComment, isLoading, errMess}) => {
 
 
     let {id} = useParams();
@@ -22,7 +22,7 @@ const DishWithId = ({dishes, comments, addComment, isLoading, errMess}) => {
         );
     } else
         return (
-            <DishDetail addComment={addComment} dish={dish} comments={dishComments}/>
+            <DishDetail postComment={postComment} dish={dish} comments={dishComments}/>
         );
 }
 
